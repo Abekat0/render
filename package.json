@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\""
+    "test": "\"echo \\\"Error: no test specified\\\" && exit 1\"",
+    "build:ui": "rm -rf dist && cd ../FullStack/part3/3b  && npm run build && cp -r dist ../../../render",
+    "deploy:ui": "npm run build:ui && git add . && git commit -m uibuild && git push origin HEAD:main"
   },
   "author": "",
   "license": "ISC",
