@@ -27,18 +27,22 @@ const requestLogger = (request, response, next) => {
     console.log('---')
     next()
 }
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+  console.log(`Server running on port: ${PORT}`)
+})
 app.use(express.json())
 const cors = require('cors')
-
+app.use(express.static('dist'))
 app.use(cors())
 app.use(requestLogger)
 const unknownEndpoint = (request, response) => {
     response.status(404).send({ error: 'unknown endpoint' })
 }
 
-app.get('/', (request, response) => {
+/*app.get('/', (request, response) => {
     response.send('<h1>Abekat</h1>')
-})
+})*/
 
 app.get('/api/notes', (request, response) => {
     response.json(notes)
@@ -89,7 +93,3 @@ app.post('/api/notes', (request, response) => {
 app.use(unknownEndpoint)
 
 
-const PORT = process.env.PORT || 3001
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`)
-})
